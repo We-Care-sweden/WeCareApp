@@ -15,6 +15,7 @@ import LinearGradient from 'react-native-linear-gradient'
 import Close from '../assets/img/close.svg'
 import {Context} from '../utils/Store'
 import DateTimePicker from '@react-native-community/datetimepicker'
+import Dp3tSwitch from './Dp3tSwitch';
 
 const {width, height} = Dimensions.get('window')
 
@@ -160,13 +161,7 @@ const Drawer = () => {
                   <Text style={styles.text}>Enable Contact tracing</Text>
                 </View>
                 <View style={[styles.col, {flex: 1}]}>
-                  <Switch
-                    trackColor={{false: '#C4C4C4', true: '#33BDBD'}}
-                    thumbColor={'#ffffff'}
-                    ios_backgroundColor="#C4C4C4"
-                    onValueChange={() => toggleSwitch('CT')}
-                    value={contactTracingEnabled}
-                  />
+                  <Dp3tSwitch />
                 </View>
               </View>
             </ScrollView>
