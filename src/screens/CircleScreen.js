@@ -83,29 +83,20 @@ const CircleScreen = () => {
                 </View>
                 <View style={styles.col}>
                   <TouchableOpacity style={styles.touchable}>
-                    <LinearGradient
+                    {/* <LinearGradient
                       colors={['#4457FF', '#1900B5']}
                       style={styles.personWrapperActive}>
-                      <Man />
-                    </LinearGradient>
+                    </LinearGradient> */}
+                    <Woman />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.col}>
                   <TouchableOpacity style={styles.touchable}>
-                    <LinearGradient
+                    {/* <LinearGradient
                       colors={['#4457FF', '#1900B5']}
                       style={styles.personWrapperActive}>
-                      <Kid />
-                    </LinearGradient>
-                  </TouchableOpacity>
-                </View>
-                <View style={styles.col}>
-                  <TouchableOpacity style={styles.touchable}>
-                    <LinearGradient
-                      colors={['#4457FF', '#1900B5']}
-                      style={styles.personWrapperActive}>
-                      <Woman />
-                    </LinearGradient>
+                    </LinearGradient> */}
+                    <Woman />
                   </TouchableOpacity>
                 </View>
               </ScrollView>

@@ -7,29 +7,37 @@ import {
   Dimensions,
   ScrollView,
   Image,
+  TouchableOpacity,
 } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import Header from '../components/Header'
 import {Colors} from 'react-native/Libraries/NewAppScreen'
-import {TouchableOpacity} from 'react-native-gesture-handler'
 import Edit from '../assets/img/edit.svg'
 import Woman from '../assets/img/woman.svg'
 import Man from '../assets/img/man.svg'
 import Kid from '../assets/img/kid.svg'
+import Delete from '../assets/img/delete.svg'
 import Tips1 from '../assets/img/tips1.png'
 import FeelGood from '../components/FeelGood'
 import AddPerson from '../components/AddPerson'
+import ConfirmDialog from '../components/ConfirmDialog'
 
 const {width, height} = Dimensions.get('window')
 
 const HomeScreen = () => {
   const [openFeelGood, setOpenFeelGood] = useState(false)
   const [openAddPerson, setOpenAddPerson] = useState(false)
+  const [openConfirmDialog, setOpenConfirmDialog] = useState(false)
+  const [circleEditMode, setCircleEditMode] = useState(false)
 
   return (
     <>
       <FeelGood open={openFeelGood} onClose={() => setOpenFeelGood(false)} />
       <AddPerson open={openAddPerson} onClose={() => setOpenAddPerson(false)} />
+      <ConfirmDialog
+        open={openConfirmDialog}
+        onCancel={() => setOpenConfirmDialog(false)}
+      />
       <SafeAreaView>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.reportWrapper}>
@@ -58,14 +66,21 @@ const HomeScreen = () => {
             <LinearGradient
               colors={['#7280FF', '#351ADC']}
               style={styles.linearGradient}>
-              {/* <ScrollView> */}
               <View style={styles.row}>
                 <View style={styles.col}>
                   <Text style={styles.title}>Care Circle</Text>
                 </View>
                 <View style={styles.col}>
-                  <TouchableOpacity style={styles.touchableEdit}>
-                    <Edit />
+                  <TouchableOpacity
+                    style={styles.touchableEdit}
+                    onPress={() => setCircleEditMode(prevState => !prevState)}>
+                    {circleEditMode ? (
+                      <View style={styles.doneButton}>
+                        <Text style={styles.text}>Done</Text>
+                      </View>
+                    ) : (
+                      <Edit />
+                    )}
                   </TouchableOpacity>
                 </View>
               </View>
@@ -74,17 +89,41 @@ const HomeScreen = () => {
                 to get updates on their health status.
               </Text>
               <View style={styles.row}>
-                <View style={[styles.col, {flex: 1}]}>
+                <View
+                  style={[
+                    styles.col,
+                    {flex: 1},
+                    circleEditMode && {opacity: 0.5},
+                  ]}>
                   <Woman />
                 </View>
-                <View style={[styles.col, {flex: 1}]}>
+                <View
+                  style={[
+                    styles.col,
+                    {flex: 1},
+                    circleEditMode && {opacity: 0.5},
+                  ]}>
                   <Text style={styles.text}>Mom</Text>
                 </View>
-                <View style={[styles.col, {flex: 2}]}>
+                <View
+                  style={[
+                    styles.col,
+                    {flex: 2},
+                    circleEditMode && {opacity: 0.5},
+                  ]}>
                   <Text style={styles.text}>Reported 5h ago</Text>
                 </View>
                 <View style={[styles.col, {flex: 2}]}>
-                  <View style={styles.green} />
+                  {circleEditMode && (
+                    <TouchableOpacity
+                      style={styles.delete}
+                      onPress={() => setOpenConfirmDialog(true)}>
+                      <Delete width={40} height={40} />
+                    </TouchableOpacity>
+                  )}
+                  <View
+                    style={[styles.green, circleEditMode && {opacity: 0.5}]}
+                  />
                 </View>
               </View>
               <View style={styles.row}>
@@ -164,7 +203,6 @@ const HomeScreen = () => {
                   <Text style={styles.text}>Add Person</Text>
                 </TouchableOpacity>
               </View>
-              {/* </ScrollView> */}
             </LinearGradient>
           </View>
           <View style={styles.tipsWrapper}>
@@ -213,6 +251,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: Colors.white,
+    textAlign: 'center',
   },
   buttonsWrapper: {
     flexDirection: 'row',
@@ -260,6 +299,16 @@ const styles = StyleSheet.create({
     marginLeft: 150,
     marginTop: 15,
   },
+  doneButton: {
+    backgroundColor: '#99ccff',
+    borderRadius: 50,
+    width: 50,
+    height: 30,
+    justifyContent: 'center',
+    alignContent: 'center',
+    marginRight: 20,
+    marginBottom: 5,
+  },
   green: {
     width: 40,
     height: 7,
@@ -283,6 +332,13 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
+  },
+  delete: {
+    position: 'absolute',
+    top: 5,
+    width: 40,
+    height: 40,
+    zIndex: 1,
   },
   col: {
     flex: 1,
