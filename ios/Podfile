@@ -88,6 +88,8 @@ target 'WeCare' do
   pod 'Firebase/Analytics'
 
 
+  pod 'react-native-dp3t-sdk', :path => '../node_modules/react-native-dp3t-sdk'
+
   target 'WeCareTests' do
     inherit! :complete
     # Pods for testing
