@@ -273,6 +273,32 @@ const MapScreen = () => {
                         <Kid />
                         {/* <Icon name="minus" size={25} color={Colors.primary} /> */}
                       </TouchableOpacity>
+                      <TouchableOpacity
+                        style={styles.controlButtons}
+                        onPress={() =>
+                          setMapCoords({
+                            latitude: mapCoords.latitude,
+                            longitude: mapCoords.longitude,
+                            latitudeDelta: mapCoords.latitudeDelta + 0.01,
+                            longitudeDelta: mapCoords.longitudeDelta + 0.01,
+                          })
+                        }>
+                        <Kid />
+                        {/* <Icon name="minus" size={25} color={Colors.primary} /> */}
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={styles.controlButtons}
+                        onPress={() =>
+                          setMapCoords({
+                            latitude: mapCoords.latitude,
+                            longitude: mapCoords.longitude,
+                            latitudeDelta: mapCoords.latitudeDelta + 0.01,
+                            longitudeDelta: mapCoords.longitudeDelta + 0.01,
+                          })
+                        }>
+                        <Kid />
+                        {/* <Icon name="minus" size={25} color={Colors.primary} /> */}
+                      </TouchableOpacity>
                     </ScrollView>
                   </View>
                 </View>
